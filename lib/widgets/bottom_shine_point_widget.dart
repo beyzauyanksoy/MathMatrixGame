@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 
-class bottomShineandPointwidget extends StatelessWidget {
+class bottomShineandPointwidget extends StatefulWidget {
   const bottomShineandPointwidget({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<bottomShineandPointwidget> createState() => _bottomShineandPointwidgetState();
+}
+
+class _bottomShineandPointwidgetState extends State<bottomShineandPointwidget> {
+  bool isnight=false;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -32,8 +38,14 @@ class bottomShineandPointwidget extends StatelessWidget {
           ),
         ),
         GestureDetector(
-          onTap: () {},
-          child: Image.asset(
+          onTap: () {
+            setState(() {
+              isnight=!isnight;
+              
+            });
+            
+          },
+          child: isnight==true ? Image.asset('assets/moon.png',width: 45,): Image.asset(
             "assets/sun.png",
             width: 45,
           ),
