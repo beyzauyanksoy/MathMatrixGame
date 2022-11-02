@@ -32,8 +32,8 @@ class _MathPuzzleState extends State<MathPuzzle> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            MathTopWidget(),
-            Container(
+            const MathTopWidget(),
+            SizedBox(
               width: 355,
               child: ListView.builder(
                 shrinkWrap: true,

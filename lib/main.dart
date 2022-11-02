@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'game_home_screen.dart';
+import 'gameover.dart';
 
 void main() {
   runApp(const MyApp());
