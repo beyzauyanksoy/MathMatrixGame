@@ -29,60 +29,85 @@ class _CalculatorState extends State<Calculator> {
                       bottomRight: Radius.circular(20),
                     ),
                   ),
-                  height: 95,
+                  height: 105,
                   width: MediaQuery.of(context).size.width,
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 20),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: Container(
-                              child: Image.asset(
-                                'assets/previous.png',
-                                width: 40,
-                                color: const Color(0xffDeaab9),
+                    padding: const EdgeInsets.only(top: 30),
+                    child: Stack(
+                      children: [
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      child: Image.asset(
+                                        'assets/previous.png',
+                                        width: 40,
+                                        color: const Color(0xffDeaab9),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 105,
-                            //color: Colors.amber,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Image.asset(
-                                  "assets/trophy.png",
-                                  width: 30,
+                              Container(
+                                width: 105,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Image.asset(
+                                      "assets/trophy.png",
+                                      width: 30,
+                                    ),
+                                    const Text(
+                                      '125000',
+                                      style: TextStyle(
+                                          color: Color(0xffDeaab9),
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  ],
                                 ),
-                                Text(
-                                  '125000',
-                                  style: TextStyle(
-                                      color: Color(0xffDeaab9),
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w500),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  print(isdialog);
+                                  setState(() {
+                                    isdialog = true;
+                                    print(isdialog);
+                                  });
+                                },
+                                child: Image.asset(
+                                  'assets/pause.png',
+                                  width: 48,
+                                  color: Color(0xffDeaab9),
                                 ),
-                              ],
+                              ),
+                            ]),
+                        Positioned(
+                          top: 69,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(),
+                              color: Colors.white,
                             ),
+                            width: 400,
+                            height: 6,
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              print(isdialog);
-                              setState(() {
-                                isdialog = true;
-                                print(isdialog);
-                              });
-                            },
-                            child: Image.asset(
-                              'assets/pause.png',
-                              width: 48,
-                              color: Color(0xffDeaab9),
-                            ),
-                          ),
-                        ]),
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          child: Container(
+                              width: 360, height: 5, color: Colors.blueAccent),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Column(
@@ -96,27 +121,58 @@ class _CalculatorState extends State<Calculator> {
                           onTap: () {
                             showModalBottomSheet(
                               context: context,
-                              backgroundColor: Color(0xffDeaab9),
-                              shape: RoundedRectangleBorder(
+                              backgroundColor: const Color(0xffDeaab9),
+                              shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.only(
                                       topLeft: Radius.circular(20),
                                       topRight: Radius.circular(20))),
                               builder: (BuildContext context) {
-                                return Container(
-                                  
-                                  height: 400,
+                                return SizedBox(
+                                  height: 550,
                                   child: Center(
                                     child: Column(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      mainAxisSize: MainAxisSize.min,
+                                          MainAxisAlignment.start,
+                                      // mainAxisSize: MainAxisSize.min,
                                       children: <Widget>[
-                                        const Text('Modal BottomSheet'),
-                                        ElevatedButton(
-                                          child:
-                                              const Text('Close BottomSheet'),
-                                          onPressed: () =>
-                                              Navigator.pop(context),
+                                        const Padding(
+                                          padding: EdgeInsets.only(top: 20),
+                                          child: Text(
+                                            'Calculator',
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 25),
+                                          child: SizedBox(
+                                            width: 350,
+                                            child: Image.asset(
+                                                "assets/calculator-intro.gif"),
+                                          ),
+                                        ),
+                                        const Text(
+                                          "You need to solve given equation\ncorrectly",
+                                          style: TextStyle(fontSize: 18),
+                                        ),
+                                        const Text(
+                                          "1.0 for correct answer",
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                        const Text(
+                                          "-1.0 for wrong answer",
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 10),
+                                          child: ElevatedButton(
+                                            child: const Text('GOT IT !'),
+                                            onPressed: () =>
+                                                Navigator.pop(context),
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -125,18 +181,18 @@ class _CalculatorState extends State<Calculator> {
                               },
                             );
                           },
-                          child: Text(
+                          child: const Text(
                             "CALCULATOR",
                             style: TextStyle(fontSize: 16),
                           ),
                         )),
                       ),
                     ),
-                    Container(
+                    SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
+                        children: const [
                           Text(
                             "7",
                             style: TextStyle(fontSize: 35),
@@ -158,7 +214,6 @@ class _CalculatorState extends State<Calculator> {
                     )
                   ],
                 ),
-
                 GridView(
                   shrinkWrap: true,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -298,7 +353,14 @@ class _CalculatorState extends State<Calculator> {
                           offset: Offset(4, 4),
                         ),
                       ], color: Color(0xffDEAAB9), shape: BoxShape.circle),
-                      child: const Center(child: Text('Clear')),
+                      child: const Center(
+                          child: Text(
+                        'Clear',
+                        style: TextStyle(
+                            color: Color(0xffd62d65),
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500),
+                      )),
                     ),
                     Container(
                       width: 20,
@@ -322,55 +384,79 @@ class _CalculatorState extends State<Calculator> {
                           offset: Offset(4, 4),
                         ),
                       ], color: Color(0xffDEAAB9), shape: BoxShape.circle),
-                      child: const Center(child: Text('icon')),
+                      child: Center(
+                          child: Image.asset(
+                        'assets/delete1.png',
+                        width: 35,
+                      )),
                     ),
                   ],
                 ),
-                // GridView.builder(
-
-                //   shrinkWrap: true,
-                //     itemCount: ornekListem.length,
-                //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                //         crossAxisCount:
-                //          4),
-                //     //listenin uzunluğu
-                //     itemBuilder: (BuildContext context,index) {
-                //       return Container(
-                //         margin: EdgeInsets.all(5),
-                //         width: 100,
-                //         height: 100,
-                //         color: Colors.amber,
-                //         child: Text(ornekListem[index],style: TextStyle(color: Colors.black),));
-                //     })
               ],
             ),
             isdialog == true
                 ? Positioned(
                     bottom: 200,
-                    left: 120,
+                    left: 90,
                     child: Container(
-                      width: 200,
-                      color:  Color(0xffDeaab9),
+                      decoration: BoxDecoration(
+                          color: const Color(0xffDeaab9),
+                          borderRadius: BorderRadius.circular(20)),
+                      width: 250,
+                      height: 135,
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Text('Game Over !!!'),
-                          Text('Your Highest score is 0.0'),
-                          ElevatedButton(
-                            onPressed: () {},
-                            child: Text("RESTART",),
+                          const Text(
+                            'Game Over !!!',
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.w500),
                           ),
-                          IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  isdialog = false;
-                                });
-                              },
-                              icon: Icon(Icons.delete))
+                          const Text(
+                            'Your Highest score is 0.0',
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.w500),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.black),
+                                onPressed: () {},
+                                child: const Text(
+                                  "RESTART",
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: Container(
+                                  width: 42,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.black,
+                                  ),
+                                  child: IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        isdialog = false;
+                                      });
+                                    },
+                                    icon: const Icon(
+                                      Icons.delete,
+                                      size: 28,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ),
                   )
-                : SizedBox(),
+                : const SizedBox(),
             //Calculator()
           ],
         ),
