@@ -21,93 +21,112 @@ class _CalculatorState extends State<Calculator> {
           children: [
             Column(
               children: [
-                Container(
-                  decoration: const BoxDecoration(
-                    color: Color(0xffC05C78),
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(20),
-                      bottomRight: Radius.circular(20),
-                    ),
-                  ),
+                SizedBox(
                   height: 105,
                   width: MediaQuery.of(context).size.width,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 30),
-                    child: Stack(
-                      children: [
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: Stack(
-                                  children: [
-                                    Container(
-                                      child: Image.asset(
-                                        'assets/previous.png',
-                                        width: 40,
-                                        color: const Color(0xffDeaab9),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                width: 105,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Image.asset(
-                                      "assets/trophy.png",
-                                      width: 30,
-                                    ),
-                                    const Text(
-                                      '125000',
-                                      style: TextStyle(
-                                          color: Color(0xffDeaab9),
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  print(isdialog);
-                                  setState(() {
-                                    isdialog = true;
-                                    print(isdialog);
-                                  });
-                                },
-                                child: Image.asset(
-                                  'assets/pause.png',
-                                  width: 48,
-                                  color: Color(0xffDeaab9),
-                                ),
-                              ),
-                            ]),
-                        Positioned(
-                          top: 69,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(),
-                              color: Colors.white,
-                            ),
-                            width: 400,
-                            height: 6,
+                  child: Stack(
+                    children: [
+                      //siyah container
+                      Positioned(
+                        bottom: 0,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.black,
                           ),
                         ),
-                        Positioned(
-                          bottom: 0,
-                          child: Container(
-                              width: 360, height: 5, color: Colors.blueAccent),
+                      ),
+                      //mavi container
+                      Positioned(
+                        bottom: 0,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width / 5,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.blueAccent,
+                          ),
                         ),
-                      ],
-                    ),
+                      ),
+                      //pembe kısım
+                      Container(
+                        decoration: const BoxDecoration(
+                          color: Color(0xffC05C78),
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(20),
+                            bottomRight: Radius.circular(20),
+                          ),
+                        ),
+                        height: 100,
+                        width: MediaQuery.of(context).size.width,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 30),
+                          child: Container(
+                            height: 105,
+                            width: MediaQuery.of(context).size.width,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 16),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context).pop();
+                                      //gesturedetector 1
+                                    },
+                                    child: Image.asset(
+                                      'assets/previous.png',
+                                      width: 40,
+                                      color: const Color(0xffDeaab9),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        "assets/trophy.png",
+                                        width: 30,
+                                      ),
+                                      const Text(
+                                        '125000',
+                                        style: TextStyle(
+                                            color: Color(0xffDeaab9),
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 16),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      print(isdialog);
+                                      //gesturedetector2
+                                      setState(() {
+                                        isdialog = true;
+                                        print(isdialog);
+                                      });
+                                    },
+                                    child: Image.asset(
+                                      'assets/pause.png',
+                                      width: 48,
+                                      color: Color(0xffDeaab9),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 Column(
