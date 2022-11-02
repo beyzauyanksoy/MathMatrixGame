@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
+import 'widgets/math_item.dart';
+import 'widgets/math_topwidget.dart';
+
 class MathPuzzle extends StatefulWidget {
   const MathPuzzle({super.key});
 
@@ -9,43 +12,45 @@ class MathPuzzle extends StatefulWidget {
   State<MathPuzzle> createState() => _MathPuzzleState();
 }
 
+List<String> mathText = [
+  "Hesap Makinesi",
+  "İşareti tahmin et",
+  "Dogru Cevap",
+  "Hızlı Hesaplama",
+];
+List<String> imageUrl = [
+  "assets/hourglassColor.png",
+  "assets/creativity1.png",
+  "assets/check1.png",
+  "assets/bolt.png",
+];
+
 class _MathPuzzleState extends State<MathPuzzle> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Stack(
-            children: [
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: 250,
-                color: Color(0xffC05c78),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            MathTopWidget(),
+            Container(
+              width: 355,
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: mathText.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                      padding: const EdgeInsets.only(top: 15),
+                      child: MathItem(
+                        mathText: mathText[index],
+                        score: '0',
+                        imageUrl: imageUrl[index],
+                      ));
+                },
               ),
-              Positioned(
-                right: 0,
-                child: Image.asset(
-                  "assets/Blob.png",
-                ),
-              ),
-              Positioned(
-                top: 10,
-                right: 10,
-                child: Image.asset('assets/Group.png'),
-              ),
-              Positioned(
-                  top: 25,
-                  left: 10,
-                  child: Container(
-                    child: Image.asset(
-                      'assets/previous.png',
-                      width: 40,
-                      color: Color(0xffDeaab9),
-                    ),
-                  ))
-            ],
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
