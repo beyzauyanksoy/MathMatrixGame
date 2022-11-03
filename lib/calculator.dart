@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -13,6 +15,31 @@ class Calculator extends StatefulWidget {
 
 class _CalculatorState extends State<Calculator> {
   bool isdialog = false;
+  double sure = 400;
+  bool isPlay = false;
+
+  late Timer _timer;
+
+  void startTimer() {
+    const oneSec = Duration(milliseconds: 50);
+    _timer = Timer.periodic(
+      oneSec,
+      (Timer timer) {
+        if (sure == 0 || isPlay == false) {
+          setState(() {
+            isPlay = false;
+            isdialog = true;
+            timer.cancel();
+          });
+        } else {
+          setState(() {
+            sure--;
+          });
+        }
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +69,7 @@ class _CalculatorState extends State<Calculator> {
                       Positioned(
                         bottom: 0,
                         child: Container(
-                          width: MediaQuery.of(context).size.width / 5,
+                          width: sure,
                           height: 50,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
@@ -107,18 +134,26 @@ class _CalculatorState extends State<Calculator> {
                                   padding: const EdgeInsets.only(right: 16),
                                   child: GestureDetector(
                                     onTap: () {
+                                      startTimer();
                                       print(isdialog);
                                       //gesturedetector2
                                       setState(() {
+                                        isPlay = !isPlay;
                                         isdialog = true;
                                         print(isdialog);
                                       });
                                     },
-                                    child: Image.asset(
-                                      'assets/pause.png',
-                                      width: 48,
-                                      color: Color(0xffDeaab9),
-                                    ),
+                                    child: isPlay == true
+                                        ? Image.asset(
+                                            'assets/pause.png',
+                                            width: 48,
+                                            color: Color(0xffDeaab9),
+                                          )
+                                        : Image.asset(
+                                            'assets/play-buttonColor.png',
+                                            width: 48,
+                                            color: Color(0xffDeaab9),
+                                          ),
                                   ),
                                 ),
                               ],
